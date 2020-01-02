@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://cdn.contentful.com/spaces/cfexampleapi/entries
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Authorization:
+      - Bearer b4c0n73n7fu1
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Accept-Encoding:
+      - gzip
+      Connection:
+      - close
+      Host:
+      - cdn.contentful.com
+      User-Agent:
+      - http.rb/4.2.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature
+      Access-Control-Allow-Methods:
+      - GET,HEAD,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Etag
+      Access-Control-Max-Age:
+      - '86400'
+      Cf-Environment-Id:
+      - master
+      Cf-Environment-Uuid:
+      - b0e55a5c-6ee0-4c81-b32a-3bd22a568e43
+      Cf-Organization-Id:
+      - 7BLDDu2FYCNoN4QIWys1BR
+      Cf-Space-Id:
+      - cfexampleapi
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Contentful-Api:
+      - cda_cached
+      Etag:
+      - W/"8392129624953409308"
+      Server:
+      - Contentful
+      X-Content-Type-Options:
+      - nosniff
+      X-Contentful-Region:
+      - us-east-1
+      Content-Length:
+      - '2061'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 02 Jan 2020 18:10:57 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '7116'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-gru17141-GRU
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      Vary:
+      - Accept-Encoding
+      X-Contentful-Request-Id:
+      - b500b1bd-3512-47c1-8520-a04115672301
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+    http_version: 
+  recorded_at: Thu, 02 Jan 2020 18:10:57 GMT
+recorded_with: VCR 5.0.0
