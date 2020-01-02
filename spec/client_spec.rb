@@ -25,4 +25,29 @@ RSpec.describe ContentfulLite::Client do
       it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
     end
   end
+
+  describe '#entry' do
+    let(:cassette_name) { 'entry' }
+    let(:query) { {} }
+    let(:entry_id) { 'nyancat' }
+    subject do
+      instance.entry(entry_id, query)
+    end
+
+    it { is_expected.to be_a(Hash) }
+
+    context 'when the query is invalid' do
+      let(:cassette_name) { 'entry_invalid_query' }
+      let(:query) { { locale: 'invalid_value' } }
+
+      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
+    end
+
+    context 'when the id is not found' do
+      let(:cassette_name) { 'entry_missings_id' }
+      let(:entry_id) { 'invalidcat' }
+
+      it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError) }
+    end
+  end
 end
