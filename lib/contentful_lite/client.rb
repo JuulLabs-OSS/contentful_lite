@@ -18,6 +18,10 @@ module ContentfulLite
       @access_token = access_token
     end
 
+    def entries(query = {})
+      request(:entries, query)
+    end
+
     private
 
     def create_url(endpoint)
