@@ -19,6 +19,12 @@ module ContentfulLite
         endpoint.to_s
     end
 
+    def request(endpoint, parameters)
+      parameters.transform_keys!(&:to_s)
+      parameters.transform_values{ |value| value.is_a?(::Array) ? value.join(',') : value }
+      response = HTTP[request_headers].get(create_url(endpoint), params: parameters)
+    end
+
     def request_headers
       {
         'Authorization' => "Bearer #{@access_token}",
