@@ -22,6 +22,10 @@ module ContentfulLite
       request(:entries, query)
     end
 
+    def entry(id, query = {})
+      request("entries/#{id}", query)
+    end
+
     private
 
     def create_url(endpoint)
