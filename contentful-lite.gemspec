@@ -15,4 +15,9 @@ Gem::Specification.new do |spec|
   end
 
   spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "webmock"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "vcr"
 end
