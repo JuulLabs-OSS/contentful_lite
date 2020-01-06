@@ -1,0 +1,5 @@
+#!/bin/bash
+
+files=$(git status -s | grep -E 'A|M' | awk '{print $2}')
+files="$files $(git status -s | grep -E 'R' | awk '{print $4}')"
+echo $files | xargs bundle exec rubocop -c .rubocop.yml --force-exclusion -a --fail-level autocorrect
