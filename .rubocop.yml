@@ -1,0 +1,239 @@
+# Relaxed.Ruby.Style
+## Version 2.1
+AllCops:
+  TargetRubyVersion: 2.5
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+Style/Alias:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylealias
+
+Style/AsciiComments:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styleasciicomments
+
+Style/BeginBlock:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylebeginblock
+
+Style/BlockDelimiters:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styleblockdelimiters
+
+Style/CommentAnnotation:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylecommentannotation
+
+Style/Documentation:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styledocumentation
+
+Style/DoubleNegation:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styledoublenegation
+
+Style/EndBlock:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styleendblock
+
+Style/FormatString:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styleformatstring
+
+Style/IfUnlessModifier:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styleifunlessmodifier
+
+Style/Lambda:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylelambda
+
+Style/ModuleFunction:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylemodulefunction
+
+Style/MultilineBlockChain:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylemultilineblockchain
+
+Style/NegatedIf:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylenegatedif
+
+Style/NegatedWhile:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylenegatedwhile
+
+Style/ParallelAssignment:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styleparallelassignment
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylepercentliteraldelimiters
+
+Style/PerlBackrefs:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styleperlbackrefs
+
+Style/RaiseArgs:
+  Enabled: false
+
+Style/Semicolon:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylesemicolon
+
+Style/SignalException:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylesignalexception
+
+Style/SingleLineBlockParams:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylesinglelineblockparams
+
+Style/SingleLineMethods:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylesinglelinemethods
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EmptyComment:
+  Enabled: false
+
+Layout/FirstArgumentIndentation:
+  EnforcedStyle: consistent
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#layoutspacebeforeblockbraces
+
+Layout/SpaceInsideParens:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#layoutspaceinsideparens
+
+Layout/IndentationConsistency:
+  Enabled: true
+
+Layout/DotPosition:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#layoutdotposition
+
+Layout/IndentationWidth:
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylespecialglobalvars
+
+Style/StringLiterals:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylestringliterals
+
+Style/TrailingCommaInArguments:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styletrailingcommainarguments
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/WhileUntilModifier:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylewhileuntilmodifier
+
+Style/WordArray:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylewordarray
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  Exclude:
+    - "spec/**/*"
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/ConstantName:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Security/MarshalLoad:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: false
+
+Style/Encoding:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/RedundantConditional:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
