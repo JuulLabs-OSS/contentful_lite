@@ -1,0 +1,103 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://cdn.contentful.com/spaces/cfexampleapi/entries?invalid_parameter=invalid_value
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Authorization:
+      - Bearer b4c0n73n7fu1
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Accept-Encoding:
+      - gzip
+      Connection:
+      - close
+      Host:
+      - cdn.contentful.com
+      User-Agent:
+      - http.rb/4.2.0
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Access-Control-Allow-Headers:
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature
+      Access-Control-Allow-Methods:
+      - GET,HEAD,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Etag
+      Access-Control-Max-Age:
+      - '86400'
+      Cf-Environment-Id:
+      - master
+      Cf-Environment-Uuid:
+      - b0e55a5c-6ee0-4c81-b32a-3bd22a568e43
+      Cf-Organization-Id:
+      - 7BLDDu2FYCNoN4QIWys1BR
+      Cf-Space-Id:
+      - cfexampleapi
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Contentful-Api:
+      - cda_cached
+      Etag:
+      - '"2005257785589201166"'
+      Server:
+      - Contentful
+      X-Content-Type-Options:
+      - nosniff
+      X-Contentful-Region:
+      - us-east-1
+      Content-Length:
+      - '468'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 02 Jan 2020 18:37:45 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '517'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-gru17136-GRU
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      Vary:
+      - Accept-Encoding
+      X-Contentful-Request-Id:
+      - 110c4aa7-7eea-4a0a-adb6-c71eed8bed74
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "sys": {
+            "type": "Error",
+            "id": "InvalidQuery"
+          },
+          "message": "The query you sent was invalid. Probably a filter or ordering specification is not applicable to the type of a field.",
+          "details": {
+            "errors": [
+              {
+                "name": "unknown",
+                "path": [
+                  "invalid_parameter"
+                ],
+                "details": "The path \"invalid_parameter\" is not recognized"
+              }
+            ]
+          },
+          "requestId": "b8a319d8-c59a-437c-87cb-bb85ec080380"
+        }
+    http_version: 
+  recorded_at: Thu, 02 Jan 2020 18:37:45 GMT
+recorded_with: VCR 5.0.0
