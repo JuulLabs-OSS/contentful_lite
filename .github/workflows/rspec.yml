@@ -1,4 +1,4 @@
-name: Ruby
+name: Rspec
 
 on:
   pull_request:
