@@ -11,6 +11,10 @@ module ContentfulLite
       @fields = raw['fields']
     end
 
+    def contentful_link
+      "https://app.contentful.com/spaces/#{space_id}/entries/#{id}"
+    end
+
     private
 
     def parse_sys(sys)

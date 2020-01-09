@@ -14,4 +14,10 @@ RSpec.describe ContentfulLite::Entry do
     it { expect(instance.content_type_id).to eq 'cat' }
     it { expect(instance.fields).to be_a Hash }
   end
+
+  describe '#contentful_link' do
+    subject { instance.contentful_link }
+
+    it { is_expected.to eq 'https://app.contentful.com/spaces/cfexampleapi/entries/nyancat' }
+  end
 end
