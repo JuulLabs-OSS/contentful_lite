@@ -15,6 +15,12 @@ module ContentfulLite
       "https://app.contentful.com/spaces/#{space_id}/entries/#{id}"
     end
 
+    def self.field_reader(*attrs, default: nil)
+      attrs.each do |k|
+        define_method(k) { fields[k.to_s] || default }
+      end
+    end
+
     private
 
     def parse_sys(sys)
