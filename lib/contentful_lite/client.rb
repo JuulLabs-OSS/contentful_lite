@@ -23,10 +23,15 @@ module ContentfulLite
     end
 
     def entry(id, query = {})
-      request("entries/#{id}", query)
+      parse_entry request("entries/#{id}", query)
     end
 
     private
+
+    def parse_entry(hash)
+      klass = ContentfulLite::Entry.get_class(hash['sys']['contentType']['sys']['id'])
+      klass.new(hash, [])
+    end
 
     def create_url(endpoint)
       base = "https://#{preview ? 'preview' : 'cdn'}.contentful.com/spaces/#{space_id}/" +
