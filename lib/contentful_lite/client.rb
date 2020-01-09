@@ -34,7 +34,7 @@ module ContentfulLite
     end
 
     def create_url(endpoint)
-      base = "https://#{preview ? 'preview' : 'cdn'}.contentful.com/spaces/#{space_id}/" +
+      "https://#{preview ? 'preview' : 'cdn'}.contentful.com/spaces/#{space_id}/" +
         ( environment.nil? ? '' : "environments/#{environment}/" ) +
         endpoint.to_s
     end
