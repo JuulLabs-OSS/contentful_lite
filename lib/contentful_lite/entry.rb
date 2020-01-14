@@ -1,5 +1,3 @@
-require 'http'
-
 module ContentfulLite
   class Entry
     include CommonSysData
