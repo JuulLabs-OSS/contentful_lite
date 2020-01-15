@@ -26,6 +26,10 @@ module ContentfulLite
       parse_entry request("entries/#{id}", query)
     end
 
+    def asset(id, query = {})
+      ContentfulLite::Asset.new(request("assets/#{id}", query))
+    end
+
     private
 
     def parse_entry(hash)

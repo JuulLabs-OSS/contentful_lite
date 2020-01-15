@@ -50,4 +50,29 @@ RSpec.describe ContentfulLite::Client do
       it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError) }
     end
   end
+
+  describe '#asset' do
+    let(:cassette_name) { 'asset' }
+    let(:query) { {} }
+    let(:asset_id) { 'nyancat' }
+    subject do
+      instance.asset(asset_id, query)
+    end
+
+    it { is_expected.to be_a(ContentfulLite::Asset) }
+
+    context 'when the query is invalid' do
+      let(:cassette_name) { 'asset_invalid_query' }
+      let(:query) { { locale: 'invalid_value' } }
+
+      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
+    end
+
+    context 'when the id is not found' do
+      let(:cassette_name) { 'asset_missings_id' }
+      let(:asset_id) { 'invalidcat' }
+
+      it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError) }
+    end
+  end
 end
