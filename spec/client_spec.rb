@@ -16,7 +16,7 @@ RSpec.describe ContentfulLite::Client do
       instance.entries(query)
     end
 
-    it { is_expected.to be_a(Hash) }
+    it { is_expected.to be_a(ContentfulLite::EntriesArray) }
 
     context 'when the query is invalid' do
       let(:cassette_name) { 'invalid_query' }

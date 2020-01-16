@@ -19,7 +19,7 @@ module ContentfulLite
     end
 
     def entries(query = {})
-      request(:entries, query)
+      ContentfulLite::EntriesArray.new(request(:entries, query))
     end
 
     def entry(id, query = {})
