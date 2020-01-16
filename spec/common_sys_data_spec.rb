@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe ContentfulLite::CommonSysData do
   let(:klass) { Class.new.include(described_class) }
-  let(:instance) { klass.new(raw_hash, []) }
+  let(:instance) { klass.new(raw_hash) }
 
   describe '#attributes' do
     context 'with an entry' do

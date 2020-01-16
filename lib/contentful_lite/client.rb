@@ -38,7 +38,7 @@ module ContentfulLite
 
     def parse_entry(hash)
       klass = ContentfulLite::Entry.get_class(hash['sys']['contentType']['sys']['id'])
-      klass.new(hash, [])
+      klass.new(hash)
     end
 
     def create_url(endpoint)
