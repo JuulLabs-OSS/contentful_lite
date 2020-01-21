@@ -16,7 +16,7 @@ RSpec.describe ContentfulLite::Client do
       instance.entries(query)
     end
 
-    it { is_expected.to be_a(Hash) }
+    it { is_expected.to be_a(ContentfulLite::EntriesArray) }
 
     context 'when the query is invalid' do
       let(:cassette_name) { 'invalid_query' }
@@ -48,6 +48,23 @@ RSpec.describe ContentfulLite::Client do
       let(:entry_id) { 'invalidcat' }
 
       it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError) }
+    end
+  end
+
+  describe '#assets' do
+    let(:cassette_name) { 'assets' }
+    let(:query) { {} }
+    subject do
+      instance.assets(query)
+    end
+
+    it { is_expected.to be_a(ContentfulLite::AssetsArray) }
+
+    context 'when the query is invalid' do
+      let(:cassette_name) { 'assets_invalid_query' }
+      let(:query) { { invalid_parameter: 'invalid_value' } }
+
+      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
     end
   end
 

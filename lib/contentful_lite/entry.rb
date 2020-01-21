@@ -5,8 +5,8 @@ module ContentfulLite
 
     attr_reader :content_type_id, :fields
 
-    def initialize(raw, links)
-      super(raw, links)
+    def initialize(raw)
+      super(raw)
       @content_type_id = raw['sys']['contentType']['sys']['id']
       @fields = raw['fields']
     end

@@ -4,7 +4,7 @@ module ContentfulLite
   module CommonSysData
     attr_reader :id, :created_at, :updated_at, :locale, :revision, :space_id, :environment_id
 
-    def initialize(raw, _links = nil)
+    def initialize(raw)
       sys = raw['sys']
       @id = sys['id']
       @created_at = DateTime.parse sys['createdAt']

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe ContentfulLite::Entry do
   let(:entry_hash) { JSON.parse(File.read('fixtures/entries/nyancat.json')) }
-  let(:instance) { ContentfulLite::Entry.new(entry_hash, []) }
+  let(:instance) { ContentfulLite::Entry.new(entry_hash) }
 
   describe '#attributes' do
     it { expect(instance.content_type_id).to eq 'cat' }
@@ -18,7 +18,7 @@ RSpec.describe ContentfulLite::Entry do
   describe 'Class methods' do
     describe '#field_reader' do
       let(:entry_class) { Class.new(ContentfulLite::Entry) { field_reader :color } }
-      subject { entry_class.new(entry_hash, []).color }
+      subject { entry_class.new(entry_hash).color }
 
       it { is_expected.to eq 'rainbow' }
     end

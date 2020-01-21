@@ -19,7 +19,7 @@ module ContentfulLite
     end
 
     def entries(query = {})
-      request(:entries, query)
+      ContentfulLite::EntriesArray.new(request(:entries, query))
     end
 
     def entry(id, query = {})
@@ -30,11 +30,15 @@ module ContentfulLite
       ContentfulLite::Asset.new(request("assets/#{id}", query))
     end
 
+    def assets(query = {})
+      ContentfulLite::AssetsArray.new(request(:assets, query))
+    end
+
     private
 
     def parse_entry(hash)
       klass = ContentfulLite::Entry.get_class(hash['sys']['contentType']['sys']['id'])
-      klass.new(hash, [])
+      klass.new(hash)
     end
 
     def create_url(endpoint)
