@@ -15,6 +15,7 @@ RSpec.describe ContentfulLite::CommonSysData do
       it { expect(instance.revision).to eq 5 }
       it { expect(instance.space_id).to eq 'cfexampleapi' }
       it { expect(instance.environment_id).to eq 'master' }
+      it { expect(instance.retrieved_at).to be_a DateTime }
     end
   end
 
@@ -29,6 +30,7 @@ RSpec.describe ContentfulLite::CommonSysData do
       it { expect(instance.revision).to eq 1 }
       it { expect(instance.space_id).to eq 'cfexampleapi' }
       it { expect(instance.environment_id).to eq 'master' }
+      it { expect(instance.retrieved_at).to be_a DateTime }
     end
   end
 end
