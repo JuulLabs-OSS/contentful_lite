@@ -18,5 +18,19 @@ RSpec.describe ContentfulLite::EntriesArray do
       expect(instance[5].fields['bestFriend']).to be_an ContentfulLite::Entry
       expect(instance[5].fields['bestFriend'].fields['bestFriend']).to eq instance[5]
     end
+
+    describe 'serializing' do
+      subject { Marshal.load(Marshal.dump(instance)) }
+
+      it { expect(subject.first.id).to eq(instance.first.id) }
+      it { expect(subject.first.fields).to eq(instance.first.fields) }
+      it { expect(subject.last.id).to eq(instance.last.id) }
+      it { expect(subject.last.fields).to eq(instance.last.fields) }
+
+      it 'should solve the nested mutually-related entries' do
+        expect(subject[5].fields['bestFriend']).to be_an ContentfulLite::Entry
+        expect(subject[5].fields['bestFriend'].fields['bestFriend']).to eq subject[5]
+      end
+    end
   end
 end
