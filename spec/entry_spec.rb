@@ -23,4 +23,19 @@ RSpec.describe ContentfulLite::Entry do
       it { is_expected.to eq 'rainbow' }
     end
   end
+
+  describe 'serializing' do
+    subject { Marshal.load(Marshal.dump(instance)) }
+
+    it { expect(subject.id).to eq(instance.id) }
+    it { expect(subject.created_at).to eq(instance.created_at) }
+    it { expect(subject.updated_at).to eq(instance.updated_at) }
+    it { expect(subject.retrieved_at).to eq(instance.retrieved_at) }
+    it { expect(subject.locale).to eq(instance.locale) }
+    it { expect(subject.revision).to eq(instance.revision) }
+    it { expect(subject.space_id).to eq(instance.space_id) }
+    it { expect(subject.environment_id).to eq(instance.environment_id) }
+    it { expect(subject.content_type_id).to eq(instance.content_type_id) }
+    it { expect(subject.fields).to eq(instance.fields) }
+  end
 end
