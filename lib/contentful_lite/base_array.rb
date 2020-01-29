@@ -12,5 +12,9 @@ module ContentfulLite
     def __getobj__
       @items
     end
+
+    def __setobj__(value)
+      @items = value
+    end
   end
 end
