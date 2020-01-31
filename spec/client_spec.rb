@@ -4,7 +4,11 @@ RSpec.describe ContentfulLite::Client do
   let(:instance) { ContentfulLite::Client.new(space_id: 'cfexampleapi', access_token: 'b4c0n73n7fu1') }
 
   around(:each) do |example|
-    VCR.use_cassette("client/#{cassette_name}") do
+    if defined?(cassette_name)
+      VCR.use_cassette("client/#{cassette_name}") do
+        example.run
+      end
+    else
       example.run
     end
   end
@@ -98,6 +102,28 @@ RSpec.describe ContentfulLite::Client do
       let(:asset_id) { 'invalidcat' }
 
       it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError) }
+    end
+  end
+
+  describe '#build_resource' do
+    let(:fixture) { 'entries/nyancat' }
+    let(:hash) { JSON.parse(File.read("fixtures/#{fixture}.json")) }
+    subject do
+      instance.build_resource(hash)
+    end
+
+    it { is_expected.to be_a(ContentfulLite::Entry) }
+
+    context 'when the resource is an asset' do
+      let(:fixture) { 'assets/nyancat' }
+
+      it { is_expected.to be_a(ContentfulLite::Asset) }
+    end
+
+    context 'when the resource is a DeletedEntry' do
+      let(:fixture) { 'entries/deleted_entry' }
+
+      it { is_expected.to be_a(ContentfulLite::DeletedEntry) }
     end
   end
 end
