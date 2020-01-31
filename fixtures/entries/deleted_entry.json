@@ -1,0 +1,31 @@
+{
+   "sys":{
+      "type":"DeletedEntry",
+      "id":"deletedcat",
+      "space":{
+         "sys":{
+            "type":"Link",
+            "linkType":"Space",
+            "id":"cfexampleapi"
+         }
+      },
+      "environment":{
+         "sys":{
+            "id":"master",
+            "type":"Link",
+            "linkType":"Environment"
+         }
+      },
+      "contentType":{
+         "sys":{
+            "type":"Link",
+            "linkType":"ContentType",
+            "id":"cat"
+         }
+      },
+      "revision":2,
+      "createdAt":"2019-05-08T20:49:56.173Z",
+      "updatedAt":"2019-05-08T20:49:56.173Z",
+      "deletedAt":"2019-05-08T20:49:56.173Z"
+   }
+}
