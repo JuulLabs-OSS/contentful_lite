@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://cdn.contentful.com/spaces/cfexampleapi/entries?sys.id%5Bin%5D=nyancat,happycat
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Authorization:
+      - Bearer b4c0n73n7fu1
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Accept-Encoding:
+      - gzip
+      Connection:
+      - close
+      Host:
+      - cdn.contentful.com
+      User-Agent:
+      - http.rb/4.3.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Accept,Accept-Language,Authorization,Cache-Control,Content-Length,Content-Range,Content-Type,DNT,Destination,Expires,If-Match,If-Modified-Since,If-None-Match,Keep-Alive,Last-Modified,Origin,Pragma,Range,User-Agent,X-Http-Method-Override,X-Mx-ReqToken,X-Requested-With,X-Contentful-Version,X-Contentful-Content-Type,X-Contentful-Organization,X-Contentful-Skip-Transformation,X-Contentful-User-Agent,X-Contentful-Enable-Alpha-Feature
+      Access-Control-Allow-Methods:
+      - GET,HEAD,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Etag
+      Access-Control-Max-Age:
+      - '86400'
+      Cf-Environment-Id:
+      - master
+      Cf-Environment-Uuid:
+      - b0e55a5c-6ee0-4c81-b32a-3bd22a568e43
+      Cf-Organization-Id:
+      - 7BLDDu2FYCNoN4QIWys1BR
+      Cf-Space-Id:
+      - cfexampleapi
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/vnd.contentful.delivery.v1+json
+      Contentful-Api:
+      - cda_cached
+      Etag:
+      - W/"15788864171247506528"
+      Server:
+      - Contentful
+      X-Content-Type-Options:
+      - nosniff
+      X-Contentful-Region:
+      - us-east-1
+      Content-Length:
+      - '1034'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 31 Jan 2020 00:26:01 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - close
+      X-Served-By:
+      - cache-gru17120-GRU
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Contentful-Request-Id:
+      - 83f034b6-8aaa-4646-b6cd-3094303c9aeb
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+VYW2vjOBR+768oft2JrYvvb6HMMoXdYaEZBjoMRbGVRI2teC2nnczQ/z6SfImcOHG3FEpZU1pL8pHO+XTOp0/9dXF5aYmdsOLLX/JVNqpdQWXLmpYl2Vmy7+mD+qbaVCST/Ui3xJoVsgF0I2M5q2QLgrrNKpqrCb/pCetpD1bRK4mCJGqp9ou60/BFdejO1qe/GF9bas39I1fn61nj842e8eADlqpwkgX9QfIio6RgKqr2eeredZz1Y9U2K1IUu4RUxoydKx95Ve7MgaSkpKLpVCFhIQDxBPgTFMwQil0/RsCGAbw1DbZFemAA4QSGM+jFXhgDZAMY9gwof2DlhueUqzXGUauDyImoaHkIynMR/WisOYpaSR+YYBsuvQsNMJMNr6TPzSaN+/1c366MeYf3XG7dqNPZJiGZznjKJ19uWoMuG6wFo1m6LxCVIRYnuTb5pDLk8qqfIhlb033+NxmVrCj9Od+WS7kXnU/feyhlm1LNuVR1ZwzMqaj+LBnlKo9fD73DBNZx1SnDd4SrtB/Fbs7KapVKd3XKAzyBYILCGcIxAPLnD/3bjCVjDxoaaNZaTpavSwNTIahZtEZoXUkPx9b01qTQpMA7JrB2Iw202+I63H7rPH/ByPYgHuEvEE2AOwNRDKMYRzZAwbvlL+//wV+fZaU/i75Kwvh88yh654ikRrEaYbPG8G0JbaTqTbLtMZo8kIGrcloe4mOMhnHwVqR2nq/7nCZb+tSxGE+ybarZuFF+NW22um2v3Aa02wn1NvilZt8zZ7ocHdNw3cl0SsVJlWoS+n4jOssBLWe4dXxiDPGhpDc0g27s+TF2beT36E3OdqzoFCNKEy+GMEaujf2eBJQmpzXdaSzP6Lr/hPQJbXcOS0PhoR7IJ1RUc3toNNCAklIOs6rWX0NiSo4vmB42lY/CulS3EctxmJIPwk6qBVHHvrA5rRwzTxz89+0//P52di3W0+vr9Xa7EVdCODhExA3TBUHJHPqJGxD5FqBFMEd4vgCR06bMo31fLA8FdEorwrK+LGzCFOynctiLIhyZINUyZEDtNHaPLK1W0hAF+NBMBryibLlSwh9HgZHrytbM/R7iekWF3+dGr54Nqa/TLQ2sc1/Q5Qkh2BJL6+x+h3o3yhaVgdve6Rx/c744lk5Gbb2ILlxgqiGVwkcXwIYuOoY5Mnm/dGEofhn6a9DFgHZ5DbZwl4VfkenjV/cqv1lu838RXX/JnSglIElhhP0wgPMwDRB2MQ0jjwCQ+hA6yp07eWu6Qx4oftwtSllydsFfQBwQDTBAXY5HPKgrvCMOT/8Dpv/siUM69mLieG50gxyiUDCP5+69Ja7673fZ/3TxdPEbZYAUhpQSAAA=
+    http_version: 
+  recorded_at: Fri, 31 Jan 2020 00:26:01 GMT
+recorded_with: VCR 5.0.0
