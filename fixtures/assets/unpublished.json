@@ -1,0 +1,25 @@
+{
+  "sys": {
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "cfexampleapi"
+      }
+    },
+    "type": "Asset",
+    "id": "unpublished",
+    "revision": 0,
+    "createdAt": "2019-11-07T00:11:48.866Z",
+    "updatedAt": "2019-11-07T00:11:48.866Z",
+    "environment": {
+      "sys": {
+        "id": "tests",
+        "type": "Link",
+        "linkType": "Environment"
+      }
+    },
+    "locale": "en-US"
+  },
+  "fields": {}
+}

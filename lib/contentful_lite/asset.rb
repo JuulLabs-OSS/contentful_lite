@@ -10,10 +10,12 @@ module ContentfulLite
       super(raw)
       @title = raw['fields']['title']
       @description = raw['fields']['description'] || ''
-      @file_name = raw['fields']['file']['fileName']
-      @content_type = raw['fields']['file']['contentType']
-      @url = raw['fields']['file']['url']
-      @file_details = raw['fields']['file']['details']
+      unless raw['fields']['file'].nil?
+        @file_name = raw['fields']['file']['fileName']
+        @content_type = raw['fields']['file']['contentType']
+        @url = raw['fields']['file']['url']
+        @file_details = raw['fields']['file']['details']
+      end
     end
 
     def contentful_link
