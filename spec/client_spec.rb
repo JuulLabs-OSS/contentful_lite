@@ -24,6 +24,14 @@ RSpec.describe ContentfulLite::Client do
 
       it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
     end
+
+    context 'when the query has an array parameter' do
+      let(:cassette_name) { 'array_parameter' }
+      let(:query) { { 'sys.id[in]': ['nyancat', 'happycat'] } }
+
+      it { is_expected.to be_a(ContentfulLite::EntriesArray) }
+      it { expect(subject.size).to eq 2 }
+    end
   end
 
   describe '#entry' do
