@@ -49,7 +49,7 @@ module ContentfulLite
 
     def request(endpoint, parameters)
       parameters.transform_keys!(&:to_s)
-      parameters.transform_values{ |value| value.is_a?(::Array) ? value.join(',') : value }
+      parameters.transform_values! { |value| value.is_a?(::Array) ? value.join(',') : value }
       response = HTTP[request_headers].get(create_url(endpoint), params: parameters)
       body = response.to_s
       body = Zlib::GzipReader.new(StringIO.new(body)).read if response.headers['Content-Encoding'].eql?('gzip')
