@@ -34,6 +34,17 @@ module ContentfulLite
       ContentfulLite::AssetsArray.new(request(:assets, query))
     end
 
+    def build_resource(raw)
+      case raw['sys']['type']
+      when 'Entry'
+        parse_entry(raw)
+      when 'Asset'
+        ContentfulLite::Asset.new(raw)
+      when 'DeletedEntry'
+        ContentfulLite::DeletedEntry.new(raw)
+      end
+    end
+
     private
 
     def parse_entry(hash)
