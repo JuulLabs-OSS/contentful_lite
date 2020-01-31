@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe ContentfulLite::Asset do
-  let(:entry_hash) { JSON.parse(File.read('fixtures/assets/nyancat.json')) }
-  let(:instance) { ContentfulLite::Asset.new(entry_hash) }
+  let(:asset_hash) { JSON.parse(File.read('fixtures/assets/nyancat.json')) }
+  let(:instance) { ContentfulLite::Asset.new(asset_hash) }
 
   describe '#attributes' do
     it { expect(instance.title).to eq 'Nyan Cat' }
@@ -10,6 +10,16 @@ RSpec.describe ContentfulLite::Asset do
     it { expect(instance.url).to eq '//images.ctfassets.net/cfexampleapi/4gp6taAwW4CmSgumq2ekUm/9da0cd1936871b8d72343e895a00d611/Nyan_cat_250px_frame.png' }
     it { expect(instance.file_name).to eq 'Nyan_cat_250px_frame.png' }
     it { expect(instance.content_type).to eq 'image/png' }
+
+    context 'for unpublished assets without a file' do
+      let(:asset_hash) { JSON.parse(File.read('fixtures/assets/unpublished.json')) }
+
+      it { expect(instance.title).to be_nil }
+      it { expect(instance.description).to eq '' }
+      it { expect(instance.url).to be_nil }
+      it { expect(instance.file_name).to be_nil }
+      it { expect(instance.content_type).to be_nil }
+    end
   end
 
   describe '#contentful_link' do
