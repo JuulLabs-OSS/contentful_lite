@@ -3,12 +3,11 @@ module ContentfulLite
     include CommonData
     include EntryMapping
 
-    attr_reader :content_type_id, :fields
+    attr_reader :content_type_id
 
     def initialize(raw)
       super(raw)
       @content_type_id = raw['sys']['contentType']['sys']['id']
-      @fields = raw['fields']
     end
 
     def contentful_link
@@ -17,7 +16,9 @@ module ContentfulLite
 
     def self.field_reader(*attrs, default: nil)
       attrs.each do |k|
-        define_method(k) { fields[k.to_s] || default }
+        define_method(k) do |locale: nil|
+          fields(locale: locale)[k.to_s] || default
+        end
       end
     end
   end
