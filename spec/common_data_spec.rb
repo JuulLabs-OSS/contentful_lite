@@ -33,4 +33,32 @@ RSpec.describe ContentfulLite::CommonData do
       it { expect(instance.retrieved_at).to be_a DateTime }
     end
   end
+
+  describe '#fields' do
+    subject { instance.fields['name'] }
+
+    context 'for a single locale entry' do
+      let(:raw_hash) { JSON.parse(File.read('fixtures/entries/nyancat.json')) }
+
+      it { is_expected.to eq 'Nyan Cat' }
+
+      context 'when specific locale is requested' do
+        subject { instance.fields(locale: 'tlh')['name'] }
+
+        it { is_expected.to eq nil }
+      end
+    end
+
+    context 'for a multiple locale entry' do
+      let(:raw_hash) { JSON.parse(File.read('fixtures/entries/nyancat_with_locales.json')) }
+
+      it { is_expected.to eq 'Nyan Cat' }
+
+      context 'when specific locale is requested' do
+        subject { instance.fields(locale: 'tlh')['name'] }
+
+        it { is_expected.to eq "Nyan vIghro'" }
+      end
+    end
+  end
 end
