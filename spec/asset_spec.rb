@@ -20,6 +20,18 @@ RSpec.describe ContentfulLite::Asset do
       it { expect(instance.file_name).to be_nil }
       it { expect(instance.content_type).to be_nil }
     end
+
+    context 'when requesting multiple locales at once' do
+      let(:asset_hash) { JSON.parse(File.read('fixtures/assets/nyancat_with_locales.json')) }
+
+      it { expect(instance.title).to eq 'Nyan Cat' }
+      it { expect(instance.description).to eq '' }
+      it { expect(instance.url).to eq '//images.ctfassets.net/cfexampleapi/4gp6taAwW4CmSgumq2ekUm/9da0cd1936871b8d72343e895a00d611/Nyan_cat_250px_frame.png' }
+      it { expect(instance.file_name).to eq 'Nyan_cat_250px_frame.png' }
+      it { expect(instance.content_type).to eq 'image/png' }
+      it { expect(instance.title(locale: 'tlh')).to eq "Nyan vIghro'" }
+      it { expect(instance.description(locale: 'tlh')).to eq '' }
+    end
   end
 
   describe '#contentful_link' do
