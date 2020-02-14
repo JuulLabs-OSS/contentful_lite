@@ -8,6 +8,9 @@ module ContentfulLite
     def initialize(raw)
       super(raw)
       @content_type_id = raw['sys']['contentType']['sys']['id']
+      @localized_fields.values.each do |fields|
+        fields.transform_values! { |value| build_link(value) }
+      end
     end
 
     def contentful_link
@@ -20,6 +23,14 @@ module ContentfulLite
           fields(locale: locale)[k.to_s] || default
         end
       end
+    end
+
+    private
+
+    def build_link(value)
+      return value unless value.is_a?(Hash) && value.fetch('sys', {}).fetch('type', '') == 'Link'
+
+      ContentfulLite::Link.new(value)
     end
   end
 end
