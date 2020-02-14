@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe ContentfulLite::CommonSysData do
+RSpec.describe ContentfulLite::CommonData do
   let(:klass) { Class.new.include(described_class) }
   let(:instance) { klass.new(raw_hash) }
 

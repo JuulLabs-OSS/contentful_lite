@@ -1,6 +1,6 @@
 module ContentfulLite
   class Entry
-    include CommonSysData
+    include CommonData
     include EntryMapping
 
     attr_reader :content_type_id, :fields

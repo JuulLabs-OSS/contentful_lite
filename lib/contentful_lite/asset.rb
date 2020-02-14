@@ -2,7 +2,7 @@ require 'http'
 
 module ContentfulLite
   class Asset
-    include CommonSysData
+    include CommonData
 
     attr_reader :title, :description, :file_name, :content_type, :url, :file_details
 

@@ -1,7 +1,5 @@
-require 'http'
-
 module ContentfulLite
-  module CommonSysData
+  module CommonData
     attr_reader :id, :created_at, :updated_at, :locale, :revision, :space_id, :environment_id, :retrieved_at
 
     def initialize(raw)
