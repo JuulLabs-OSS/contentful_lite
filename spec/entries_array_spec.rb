@@ -35,6 +35,26 @@ RSpec.describe ContentfulLite::EntriesArray do
       end
     end
 
+    context 'when include nesting is not enough' do
+      let(:response) { JSON.parse(File.read('fixtures/entries/all_without_includes.json')) }
+
+      it { expect(instance.first).to be_an ContentfulLite::Entry }
+      it { expect(instance.last).to be_an ContentfulLite::Entry }
+      it { expect(instance.sample).to be_an ContentfulLite::Entry }
+
+      it 'should create links for the assets' do
+        expect(instance[4].fields['image']).to be_an ContentfulLite::Link
+        expect(instance[4].fields['image'].type).to eq :asset
+        expect(instance[4].fields['image'].id).to eq 'jake'
+      end
+
+      it 'should solve the nested mutually-related entries' do
+        expect(instance[5].fields['bestFriend']).to be_an ContentfulLite::Link
+        expect(instance[5].fields['bestFriend'].type).to eq :entry
+        expect(instance[5].fields['bestFriend'].id).to eq 'nyancat'
+      end
+    end
+
     describe 'serializing' do
       subject { Marshal.load(Marshal.dump(instance)) }
 

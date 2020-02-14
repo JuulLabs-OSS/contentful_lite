@@ -1,5 +1,6 @@
 require "contentful_lite/version"
 require "contentful_lite/common_data"
+require "contentful_lite/link"
 require "contentful_lite/asset"
 require "contentful_lite/entry_mapping"
 require "contentful_lite/entry"

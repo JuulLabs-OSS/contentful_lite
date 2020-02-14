@@ -21,14 +21,16 @@ RSpec.describe ContentfulLite::Entry do
       subject { entry_class.new(entry_hash) }
 
       it { expect(subject.color).to eq 'rainbow' }
-      it { expect(subject.bestFriend['sys']['type']).to eq 'Link' }
+      it { expect(subject.bestFriend).to be_a ContentfulLite::Link }
+      it { expect(subject.bestFriend.id).to eq 'happycat' }
 
       context 'with multiple locales' do
         let(:entry_hash) { JSON.parse(File.read('fixtures/entries/nyancat_with_locales.json')) }
 
         it { expect(subject.name).to eq 'Nyan Cat' }
         it { expect(subject.color).to eq 'rainbow' }
-        it { expect(subject.bestFriend['sys']['type']).to eq 'Link' }
+        it { expect(subject.bestFriend).to be_a ContentfulLite::Link }
+        it { expect(subject.bestFriend.id).to eq 'happycat' }
         it { expect(subject.name(locale: 'tlh')).to eq 'Nyan vIghro\'' }
       end
     end

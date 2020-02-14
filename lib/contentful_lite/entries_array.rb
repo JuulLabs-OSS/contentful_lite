@@ -5,8 +5,9 @@ module ContentfulLite
 
       # Collect arrays of missing (unresolvable) links
       @errors = raw.fetch('errors', []).collect! { |error| error.fetch('details', {}) }.each_with_object({}) do |error_detail, hash|
-        hash[error_detail['linkType']] ||= []
-        hash[error_detail['linkType']] << error_detail['id']
+        type = error_detail['linkType'].downcase.to_sym
+        hash[type] ||= []
+        hash[type] << error_detail['id']
       end
 
       # Create the array of asset objects
@@ -27,12 +28,10 @@ module ContentfulLite
     def solve_link(value)
       if value.is_a?(Array)
         value.collect! { |link| solve_link(link) }.tap(&:compact!)
-      elsif value.is_a?(Hash) && value.fetch('sys', {}).fetch('type', '') == 'Link'
-        link = value['sys']
-        return nil if @errors.fetch(link['linkType'], []).include?(link['id'])
-        return @assets[link['id']] if link['linkType'] == 'Asset'
+      elsif value.is_a?(ContentfulLite::Link)
+        return nil if @errors.fetch(value.type, []).include?(value.id)
 
-        build_entry(link['id'])
+        (value.type == :asset ? @assets[value.id] : build_entry(value.id)) || value
       else
         value
       end
@@ -47,6 +46,8 @@ module ContentfulLite
     def build_entry(id)
       @entries[id] || begin
         hash = @raw_entries.delete(id)
+        return nil if hash.nil?
+
         klass = ContentfulLite::Entry.get_class(hash['sys']['contentType']['sys']['id'])
         @entries[id] = klass.new(hash)
         @entries[id].localized_fields.values.each do |fields|
