@@ -49,7 +49,9 @@ module ContentfulLite
         hash = @raw_entries.delete(id)
         klass = ContentfulLite::Entry.get_class(hash['sys']['contentType']['sys']['id'])
         @entries[id] = klass.new(hash)
-        hash['fields'].transform_values! { |field| solve_link(field) }
+        @entries[id].localized_fields.values.each do |fields|
+          fields.transform_values! { |field| solve_link(field) }
+        end
         @entries[id]
       end
     end

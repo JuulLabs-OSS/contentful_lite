@@ -17,10 +17,20 @@ RSpec.describe ContentfulLite::Entry do
 
   describe 'Class methods' do
     describe '#field_reader' do
-      let(:entry_class) { Class.new(ContentfulLite::Entry) { field_reader :color } }
-      subject { entry_class.new(entry_hash).color }
+      let(:entry_class) { Class.new(ContentfulLite::Entry) { field_reader :name, :color, :bestFriend } }
+      subject { entry_class.new(entry_hash) }
 
-      it { is_expected.to eq 'rainbow' }
+      it { expect(subject.color).to eq 'rainbow' }
+      it { expect(subject.bestFriend['sys']['type']).to eq 'Link' }
+
+      context 'with multiple locales' do
+        let(:entry_hash) { JSON.parse(File.read('fixtures/entries/nyancat_with_locales.json')) }
+
+        it { expect(subject.name).to eq 'Nyan Cat' }
+        it { expect(subject.color).to eq 'rainbow' }
+        it { expect(subject.bestFriend['sys']['type']).to eq 'Link' }
+        it { expect(subject.name(locale: 'tlh')).to eq 'Nyan vIghro\'' }
+      end
     end
   end
 
