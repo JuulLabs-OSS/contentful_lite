@@ -10,6 +10,15 @@ RSpec.describe ContentfulLite::AssetsArray do
     it { expect(instance.sample).to be_an ContentfulLite::Asset }
   end
 
+  context 'with multiple locales' do
+    let(:response) { JSON.parse(File.read('fixtures/assets/all_with_locales.json')) }
+
+    describe 'should create an array of assets' do
+      it { expect(instance.first).to be_an ContentfulLite::Asset }
+      it { expect(instance.first.title).to be_a String }
+    end
+  end
+
   describe 'serializing' do
     subject { Marshal.load(Marshal.dump(instance)) }
 
