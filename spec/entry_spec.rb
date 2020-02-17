@@ -17,7 +17,7 @@ RSpec.describe ContentfulLite::Entry do
 
   describe 'Class methods' do
     describe '#field_reader' do
-      let(:entry_class) { Class.new(ContentfulLite::Entry) { field_reader :name, :color, :bestFriend } }
+      let(:entry_class) { Class.new(ContentfulLite::Entry) { field_reader :name, :color, :bestFriend, :friends } }
       subject { entry_class.new(entry_hash) }
 
       it { expect(subject.color).to eq 'rainbow' }
@@ -32,6 +32,13 @@ RSpec.describe ContentfulLite::Entry do
         it { expect(subject.bestFriend).to be_a ContentfulLite::Link }
         it { expect(subject.bestFriend.id).to eq 'happycat' }
         it { expect(subject.name(locale: 'tlh')).to eq 'Nyan vIghro\'' }
+      end
+
+      context 'with an array of references' do
+        let(:entry_hash) { JSON.parse(File.read('fixtures/entries/reference_array.json')) }
+
+        it { expect(subject.friends.first).to be_a ContentfulLite::Link }
+        it { expect(subject.friends.last).to be_a ContentfulLite::Link }
       end
     end
   end
