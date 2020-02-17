@@ -28,6 +28,7 @@ module ContentfulLite
     private
 
     def build_link(value)
+      return value.map!{ |element| build_link(element) } if value.is_a?(Array)
       return value unless value.is_a?(Hash) && value.fetch('sys', {}).fetch('type', '') == 'Link'
 
       ContentfulLite::Link.new(value)
