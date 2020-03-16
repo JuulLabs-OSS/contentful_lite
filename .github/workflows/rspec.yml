@@ -23,8 +23,14 @@ jobs:
         cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
     - name: Print version
       run: ${{ steps.ruby.outputs.ruby-path }} --version
-    - name: Build and run rspec
+    - name: Build
       run: |
         gem install bundler
         bundle install --jobs 4 --retry 3
-        bundle exec rspec
+    - name: Run rspec and report coverage
+      uses: paambaati/codeclimate-action@v2.5.4
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        COVERAGE: 1
+      with:
+        coverageCommand: bundle exec rspec
