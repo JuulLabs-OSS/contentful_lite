@@ -2,6 +2,7 @@ module ContentfulLite
   class Entry
     include CommonData
     include EntryMapping
+    include Validations::Entry
 
     attr_reader :content_type_id
 
