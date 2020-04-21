@@ -26,7 +26,7 @@ RSpec.describe ContentfulLite::Client do
       let(:cassette_name) { 'invalid_query' }
       let(:query) { { invalid_parameter: 'invalid_value' } }
 
-      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
+      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError, "InvalidQuery: The query you sent was invalid. Probably a filter or ordering specification is not applicable to the type of a field.") }
     end
 
     context 'when the query has an array parameter' do
@@ -52,14 +52,14 @@ RSpec.describe ContentfulLite::Client do
       let(:cassette_name) { 'entry_invalid_query' }
       let(:query) { { locale: 'invalid_value' } }
 
-      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
+      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError, "BadRequest: Unknown locale: invalid_value") }
     end
 
     context 'when the id is not found' do
       let(:cassette_name) { 'entry_missings_id' }
       let(:entry_id) { 'invalidcat' }
 
-      it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError) }
+      it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError, "NotFound: The resource could not be found.") }
     end
   end
 
@@ -76,7 +76,7 @@ RSpec.describe ContentfulLite::Client do
       let(:cassette_name) { 'assets_invalid_query' }
       let(:query) { { invalid_parameter: 'invalid_value' } }
 
-      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
+      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError, "InvalidQuery: The query you sent was invalid. Probably a filter or ordering specification is not applicable to the type of a field.") }
     end
   end
 
@@ -94,14 +94,14 @@ RSpec.describe ContentfulLite::Client do
       let(:cassette_name) { 'asset_invalid_query' }
       let(:query) { { locale: 'invalid_value' } }
 
-      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError) }
+      it { expect { subject }.to raise_error(ContentfulLite::Client::RequestError, "BadRequest: Unknown locale: invalid_value") }
     end
 
     context 'when the id is not found' do
       let(:cassette_name) { 'asset_missings_id' }
       let(:asset_id) { 'invalidcat' }
 
-      it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError) }
+      it { expect { subject }.to raise_error(ContentfulLite::Client::NotFoundError, "NotFound: The resource could not be found.") }
     end
   end
 

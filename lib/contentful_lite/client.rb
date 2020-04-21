@@ -3,9 +3,12 @@ require 'http'
 module ContentfulLite
   class Client
     class RequestError < StandardError
+      attr_reader :response, :body
+
       def initialize(response, body)
         @response = response
         @body = body
+        super(body['sys'] && body['sys']['type'] == 'Error' ? "#{body['sys']['id']}: #{body['message']}" : "Invalid Contentful Response: #{body}")
       end
     end
     class NotFoundError < RequestError; end
