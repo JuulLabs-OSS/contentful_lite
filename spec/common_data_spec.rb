@@ -61,4 +61,14 @@ RSpec.describe ContentfulLite::CommonData do
       end
     end
   end
+
+  describe '#with_locale' do
+    subject { instance.with_locale('tlh') { instance.fields['name'] } }
+
+    context 'for a multiple locale entry' do
+      let(:raw_hash) { JSON.parse(File.read('fixtures/entries/nyancat_with_locales.json')) }
+
+      it { is_expected.to eq "Nyan vIghro'" }
+    end
+  end
 end
