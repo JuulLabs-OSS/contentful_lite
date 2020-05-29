@@ -9,7 +9,7 @@ module ContentfulLite
           record_error(record, attr_name, "value#{idx} is not a published entry")
           return
         end
-        record_error(record, attr_name, "value has invalid child entry #{value.id}") unless value.valid?
+        record_error(record, attr_name, "value has invalid child entry #{value.id}") unless value.valid?(locale: record.default_locale)
         record_error(record, attr_name, "value#{idx} has an invalid entry model. Expecting #{options[:allowed_models]}") if invalid_model?(value)
       end
 
