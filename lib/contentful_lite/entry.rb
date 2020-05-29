@@ -18,10 +18,10 @@ module ContentfulLite
       "https://app.contentful.com/spaces/#{space_id}/entries/#{id}"
     end
 
-    def self.field_reader(*attrs, default: nil)
+    def self.field_reader(*attrs, default: nil, localizable: false)
       attrs.each do |k|
         define_method(k) do |locale: nil|
-          fields(locale: locale)[k.to_s] || default
+          fields(locale: localizable ? locale : default_locale)[k.to_s] || default
         end
       end
     end

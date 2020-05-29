@@ -17,7 +17,12 @@ RSpec.describe ContentfulLite::Entry do
 
   describe 'Class methods' do
     describe '#field_reader' do
-      let(:entry_class) { Class.new(ContentfulLite::Entry) { field_reader :name, :color, :bestFriend, :friends } }
+      let(:entry_class) do
+        Class.new(ContentfulLite::Entry) do
+          field_reader :name, localizable: true
+          field_reader :color, :bestFriend, :friends
+        end
+      end
       subject { entry_class.new(entry_hash) }
 
       it { expect(subject.color).to eq 'rainbow' }
@@ -29,9 +34,12 @@ RSpec.describe ContentfulLite::Entry do
 
         it { expect(subject.name).to eq 'Nyan Cat' }
         it { expect(subject.color).to eq 'rainbow' }
+        it { expect(subject.color(locale: 'tlh')).to eq 'rainbow' }
+        it { expect(subject.with_locale('tlh') { subject.color }).to eq 'rainbow' }
         it { expect(subject.bestFriend).to be_a ContentfulLite::Link }
         it { expect(subject.bestFriend.id).to eq 'happycat' }
         it { expect(subject.name(locale: 'tlh')).to eq 'Nyan vIghro\'' }
+        it { expect(subject.with_locale('tlh') { subject.name }).to eq 'Nyan vIghro\'' }
       end
 
       context 'with an array of references' do
