@@ -1,6 +1,6 @@
 module ContentfulLite
   module CommonData
-    attr_reader :id, :created_at, :updated_at, :locale, :revision, :space_id, :environment_id, :retrieved_at, :locales, :localized_fields
+    attr_reader :id, :created_at, :updated_at, :default_locale, :revision, :space_id, :environment_id, :retrieved_at, :locales, :localized_fields
 
     def initialize(raw)
       sys = raw['sys']
@@ -22,10 +22,32 @@ module ContentfulLite
           hash[locale] = raw['fields'].transform_values { |value| value[locale] }
         end
       end
+
+      @default_locale = @locales.first
+    end
+
+    def locale
+      @locale || @default_locale
+    end
+
+    def locale=(value)
+      raise 'Invalid Locale' unless value.in?(locales)
+
+      @locale = value
     end
 
     def fields(locale: nil)
-      @localized_fields.fetch(locale || @locales.first, {})
+      @localized_fields.fetch(locale || self.locale, {})
+    end
+
+    def with_locale(locale)
+      old_locale = @locale
+      @locale = locale unless locale.nil?
+      begin
+        yield
+      ensure
+        @locale = old_locale
+      end
     end
   end
 end

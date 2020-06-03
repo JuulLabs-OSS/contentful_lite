@@ -9,7 +9,7 @@ We've been using the official contentful gem for a while and we discovered it wa
 
 ## Features
 - Retrieve entries and assets from CDA and CPA
-- Basic localization support
+- Localization support
 - Modeling of Content Types into Ruby classes
 - Cache serialization
 - Content validations using ActiveModel::Validations
@@ -71,6 +71,7 @@ This customization is really easy to implement. An example of a complete model m
 
   - `*attrs` A symbol or array of symbols with the fields name you want to define.
   - `default: nil` The default value in case there is no value for that field.
+  - `localizable: false` A boolean to indicate if this field is marked as localizable on contentful. If true, calling `#field_name(locale: custom)` will try to retrieve the value for that locale. If false, the same call will ignore the provided locale and instead use the main locale for the entry.
 
 ### Reference for validations macros
 
@@ -163,14 +164,32 @@ Validations are implemented using ActiveModel::Validations so all the active mod
   **Parameters:**
   - `locale: nil` Optional, the locale code for the fields you want to retrieve. Defaults to first received locale
 
-- #### ActiveModel::Validation methods
+- #### #valid? `entry.valid?(locale: nil)`
 
-  ```
-  #errors, #invalid?, #valid?`
-  ```
-  Allows to check validations on the entry.
+  Executes the validations for the specified locale.
 
-  Reference to [Active Model Documentation](https://api.rubyonrails.org/v5.2.3/classes/ActiveModel/Validations.html) for more information about these methods.
+  **Parameters:**
+  - `locale: nil` Optional, the locale code you want to validate. Defaults to first received locale
+
+    Reference to #valid? [Active Model Documentation](https://api.rubyonrails.org/v5.2.3/classes/ActiveModel/Validations.html) for more information about this method.
+
+- #### #errors `entry.errors(locale: nil)`
+
+  Provides a ActiveModel::Errors with all the errors for the specified locale. You need to call it after `#valid?`
+
+  **Parameters:**
+  - `locale: nil` Optional, the locale code for the errors you want to retrieve. Defaults to first received locale
+
+    Reference to #errors [Active Model Documentation](https://api.rubyonrails.org/v5.2.3/classes/ActiveModel/Validations.html) for more information about this method.
+
+
+- #### #valid\_for\_all\_locales? `entry.valid_for_all_locales?`
+
+  Runs `#valid?` for each locale in the entry.
+
+- #### #errors\_for\_all\_locales `entry.errors_for_all_locales`
+
+  Returns an array of `locale => ActiveModel::Errors`
 
 - #### fields accessors `entry.field_name(locale: nil)`
 

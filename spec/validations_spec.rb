@@ -5,10 +5,19 @@ RSpec.describe ContentfulLite::Validations::Entry do
     klass = Class.new do
       include ContentfulLite::Validations::Entry
       attr_reader :fake_field
+      attr_accessor :default_locale
       send(validation_method, :fake_field, options)
 
       def initialize(value)
         @fake_field = value
+        @default_locale = :en
+      end
+
+      def with_locale(locale)
+        @default_locale = locale unless locale.nil?
+        yield
+      ensure
+        @default_locale = :en
       end
     end
     allow(klass).to receive(:model_name).and_return ActiveModel::Name.new(klass, nil, 'FakeClasss')
@@ -16,10 +25,95 @@ RSpec.describe ContentfulLite::Validations::Entry do
     klass
   end
 
-  let(:fake_model) { model_class.new(value) }
-  subject { fake_model.tap(&:valid?).errors[:fake_field] }
+  shared_context 'multiple locales support' do
+    before do # Mock Entry localization, as it is part of the entry class and not the validations module
+      allow(fake_model).to receive(:locales).and_return(%i[en es])
+      allow(fake_model).to receive(:fake_field) { value[fake_model.default_locale] }
+    end
+  end
 
-  describe '#validates_included_asset' do
+  let(:model_class) { create_validable_model(:validates_presence_of, {}) }
+  let(:fake_model) { model_class.new(value) }
+
+  describe '#valid?' do
+    include_context 'multiple locales support'
+    let(:value) { { en: 'valid', es: 'valid' } }
+    subject { fake_model.valid?(locale: :es) }
+
+    it { is_expected.to be_truthy }
+
+    context 'when the other locale has invalid content' do
+      let(:value) { { en: nil, es: 'valid' } }
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when that locale has invalid content' do
+      let(:value) { { en: 'valid', es: nil } }
+      it { is_expected.to be_falsey }
+    end
+
+    context 'when both locales have invalid content' do
+      let(:value) { { en: nil, es: nil } }
+      it { is_expected.to be_falsey }
+    end
+  end
+
+  describe '#valid_for_all_locales?' do
+    include_context 'multiple locales support'
+    let(:value) { { en: 'valid', es: 'valid' } }
+    subject { fake_model.valid_for_all_locales? }
+
+    it { is_expected.to be_truthy }
+
+    context 'when first locale has invalid content' do
+      let(:value) { { en: nil, es: 'valid' } }
+      it { is_expected.to be_falsey }
+    end
+
+    context 'when second locale has invalid content' do
+      let(:value) { { en: 'valid', es: nil } }
+      it { is_expected.to be_falsey }
+    end
+
+    context 'when both locales have invalid content' do
+      let(:value) { { en: nil, es: nil } }
+      it { is_expected.to be_falsey }
+    end
+  end
+
+  describe '#errors' do
+    include_context 'multiple locales support'
+    let(:value) { { en: 'valid', es: 'valid' } }
+    subject(:en) { fake_model.tap(&:valid_for_all_locales?).errors(locale: :en)[:fake_field] }
+    subject(:es) { fake_model.tap(&:valid_for_all_locales?).errors(locale: :es)[:fake_field] }
+
+    it { expect(en).to be_empty }
+    it { expect(es).to be_empty }
+
+    context 'when first locale has invalid content' do
+      let(:value) { { en: nil, es: 'valid' } }
+      it { expect(en).to eq ["can't be blank"] }
+      it { expect(es).to be_empty }
+    end
+
+    context 'when second locale has invalid content' do
+      let(:value) { { en: 'valid', es: nil } }
+
+      it { expect(en).to be_empty }
+      it { expect(es).to eq ["can't be blank"] }
+    end
+
+    context 'when both locales have invalid content' do
+      let(:value) { { en: nil, es: nil } }
+
+      it { expect(en).to eq ["can't be blank"] }
+      it { expect(es).to eq ["can't be blank"] }
+    end
+  end
+
+  describe '.validates_included_asset' do
+    subject { fake_model.tap(&:valid?).errors[:fake_field] }
+
     let(:asset) { ContentfulLite::Asset.new(JSON.parse(File.read('fixtures/assets/nyancat.json'))) }
     let(:model_class) do
       create_validable_model(:validates_included_asset, options)
@@ -117,7 +211,9 @@ RSpec.describe ContentfulLite::Validations::Entry do
     end
   end
 
-  describe '#validates_included_entry' do
+  describe '.validates_included_entry' do
+    subject { fake_model.tap(&:valid?).errors[:fake_field] }
+
     let(:entry) { ContentfulLite::Entry.new(JSON.parse(File.read('fixtures/entries/nyancat.json'))) }
     let(:model_class) do
       create_validable_model(:validates_included_entry, options)
@@ -209,6 +305,29 @@ RSpec.describe ContentfulLite::Validations::Entry do
 
         it { is_expected.to eq ['value has invalid child entry nyancat'] }
       end
+    end
+
+    context 'child is invalid only for a different locale' do
+      before do
+        allow(entry).to receive(:valid?).and_return true
+        allow(entry).to receive(:valid?).with(locale: :es).and_return false
+      end
+      let(:value) { entry }
+      it { is_expected.to be_empty }
+
+      context 'when calling validation and checking errors for that locale' do
+        subject { fake_model.tap{ |_| fake_model.valid?(locale: :es) }.errors(locale: :es)[:fake_field] }
+        it { is_expected.to eq ['value has invalid child entry nyancat'] }
+      end
+    end
+
+    context 'child is invalid only for the current locale' do
+      before do
+        allow(entry).to receive(:valid?).and_return true
+        allow(entry).to receive(:valid?).with(locale: :en).and_return false
+      end
+      let(:value) { entry }
+      it { is_expected.to eq ['value has invalid child entry nyancat'] }
     end
 
     describe 'allowed_models' do
