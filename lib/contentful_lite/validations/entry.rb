@@ -13,7 +13,7 @@ module ContentfulLite
         base_class.include(ActiveModel::Validations)
         base_class.define_method(:errors) do |locale: nil|
           @errors ||= Hash.new { |hash, key| hash[key] = ActiveModel::Errors.new(self) }
-          @errors[locale || default_locale]
+          @errors[locale || self.locale]
         end
         base_class.define_method(:valid?) do |locale: nil|
           with_locale(locale) { super() }

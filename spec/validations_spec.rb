@@ -5,19 +5,19 @@ RSpec.describe ContentfulLite::Validations::Entry do
     klass = Class.new do
       include ContentfulLite::Validations::Entry
       attr_reader :fake_field
-      attr_accessor :default_locale
+      attr_accessor :locale
       send(validation_method, :fake_field, options)
 
       def initialize(value)
         @fake_field = value
-        @default_locale = :en
+        @locale = :en
       end
 
       def with_locale(locale)
-        @default_locale = locale unless locale.nil?
+        @locale = locale unless locale.nil?
         yield
       ensure
-        @default_locale = :en
+        @locale = :en
       end
     end
     allow(klass).to receive(:model_name).and_return ActiveModel::Name.new(klass, nil, 'FakeClasss')
@@ -28,7 +28,7 @@ RSpec.describe ContentfulLite::Validations::Entry do
   shared_context 'multiple locales support' do
     before do # Mock Entry localization, as it is part of the entry class and not the validations module
       allow(fake_model).to receive(:locales).and_return(%i[en es])
-      allow(fake_model).to receive(:fake_field) { value[fake_model.default_locale] }
+      allow(fake_model).to receive(:fake_field) { value[fake_model.locale] }
     end
   end
 
