@@ -39,7 +39,7 @@ RSpec.describe ContentfulLite::Entry do
         end
       end
 
-      context 'when the spayed field is set to false', pending: true do
+      context 'when the spayed field is set to false' do
         before { entry_hash['fields']['spayed'] = false }
 
         it { expect(subject.spayed).to eq false }
