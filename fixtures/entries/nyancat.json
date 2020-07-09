@@ -44,6 +44,7 @@
     },
     "birthday": "2011-04-04T22:00:00+00:00",
     "lives": 1337,
+    "spayed": true,
     "image": {
       "sys": {
         "type": "Link",
