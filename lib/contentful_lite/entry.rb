@@ -21,7 +21,8 @@ module ContentfulLite
     def self.field_reader(*attrs, default: nil, localizable: false)
       attrs.each do |k|
         define_method(k) do |locale: nil|
-          fields(locale: localizable ? locale : default_locale)[k.to_s] || default
+          field = fields(locale: localizable ? locale : default_locale)[k.to_s]
+          field.nil? ? default : field
         end
       end
     end

@@ -21,6 +21,7 @@ RSpec.describe ContentfulLite::Entry do
         Class.new(ContentfulLite::Entry) do
           field_reader :name, localizable: true
           field_reader :color, :bestFriend, :friends
+          field_reader :spayed, default: true
         end
       end
       subject { entry_class.new(entry_hash) }
@@ -28,6 +29,21 @@ RSpec.describe ContentfulLite::Entry do
       it { expect(subject.color).to eq 'rainbow' }
       it { expect(subject.bestFriend).to be_a ContentfulLite::Link }
       it { expect(subject.bestFriend.id).to eq 'happycat' }
+      it { expect(subject.spayed).to eq true }
+
+      context 'when the spayed field is nil' do
+        before { entry_hash['fields']['spayed'] = nil }
+
+        it 'falls back to the provided default' do
+          expect(subject.spayed).to eq true
+        end
+      end
+
+      context 'when the spayed field is set to false' do
+        before { entry_hash['fields']['spayed'] = false }
+
+        it { expect(subject.spayed).to eq false }
+      end
 
       context 'with multiple locales' do
         let(:entry_hash) { JSON.parse(File.read('fixtures/entries/nyancat_with_locales.json')) }
