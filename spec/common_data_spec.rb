@@ -71,4 +71,20 @@ RSpec.describe ContentfulLite::CommonData do
       it { is_expected.to eq "Nyan vIghro'" }
     end
   end
+
+  describe '#to_link' do
+    let(:raw_hash) { JSON.parse(File.read('fixtures/entries/nyancat.json')) }
+
+    subject { instance.to_link }
+
+    it { expect(subject.id).to eq 'nyancat' }
+    it { expect(subject.type).to eq :entry }
+
+    context 'with an asset' do
+      let(:raw_hash) { JSON.parse(File.read('fixtures/assets/nyancat.json')) }
+
+      it { expect(subject.id).to eq 'nyancat' }
+      it { expect(subject.type).to eq :asset }
+    end
+  end
 end

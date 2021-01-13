@@ -7,6 +7,23 @@ RSpec.describe ContentfulLite::Link do
   describe '#attributes' do
     it { expect(subject.type).to eq :entry }
     it { expect(subject.id).to eq 'happycat' }
+
+    context 'when converting from an Entry' do
+      let(:entry) { ContentfulLite::Entry.new(entry_hash) }
+      subject { ContentfulLite::Link.new(entry) }
+
+      it { expect(subject.type).to eq :entry }
+      it { expect(subject.id).to eq 'nyancat' }
+    end
+
+    context 'when converting from an Asset' do
+      let(:asset_hash) { JSON.parse(File.read('fixtures/assets/nyancat.json')) }
+      let(:asset) { ContentfulLite::Asset.new(asset_hash) }
+      subject { ContentfulLite::Link.new(asset) }
+
+      it { expect(subject.type).to eq :asset }
+      it { expect(subject.id).to eq 'nyancat' }
+    end
   end
 
   describe '#==' do
@@ -33,5 +50,9 @@ RSpec.describe ContentfulLite::Link do
 
       it { is_expected.not_to eq comparison }
     end
+  end
+
+  describe '#as_json' do
+    it { expect(subject.as_json).to eq(entry_hash['fields']['bestFriend'].deep_symbolize_keys) }
   end
 end

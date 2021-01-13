@@ -1,9 +1,9 @@
 module ContentfulLite
   module CommonData
-    attr_reader :id, :created_at, :updated_at, :default_locale, :revision, :space_id, :environment_id, :retrieved_at, :locales, :localized_fields
+    attr_reader :id, :created_at, :updated_at, :default_locale, :revision, :space_id, :environment_id, :retrieved_at, :locales, :localized_fields, :sys
 
     def initialize(raw)
-      sys = raw['sys']
+      @sys = raw['sys']
       @id = sys['id']
       @created_at = DateTime.parse sys['createdAt']
       @updated_at = DateTime.parse sys['updatedAt']
@@ -48,6 +48,10 @@ module ContentfulLite
       ensure
         @locale = old_locale
       end
+    end
+
+    def to_link
+      ContentfulLite::Link.new(self)
     end
   end
 end
