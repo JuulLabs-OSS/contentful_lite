@@ -13,19 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/cache@preview
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
       id: cache
       with:
         path: ~/local/rubies
         key: ruby-2.6.5
-    - uses: clupprich/ruby-build-action@master
+    - uses: ruby/setup-ruby@v1.62.0
       id: ruby
       with:
         ruby-version: 2.6.5
         cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
     - name: Print version
-      run: ${{ steps.ruby.outputs.ruby-path }} --version
+      run: ruby --version
     - name: Build
       run: |
         gem install bundler
