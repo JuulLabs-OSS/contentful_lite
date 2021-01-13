@@ -53,5 +53,22 @@ module ContentfulLite
     def to_link
       ContentfulLite::Link.new(self)
     end
+
+    def as_json(_options = nil, serialized_ids: [])
+      if serialized_ids.include?(id)
+        to_link.as_json
+      else
+        {
+          sys: sys,
+          fields: fields.transform_values do |value|
+            if value.is_a?(ContentfulLite::CommonData)
+              value.as_json(serialized_ids: serialized_ids + [id])
+            else
+              value
+            end
+          end
+        }
+      end
+    end
   end
 end

@@ -87,4 +87,12 @@ RSpec.describe ContentfulLite::CommonData do
       it { expect(subject.type).to eq :asset }
     end
   end
+
+  describe '#as_json' do
+    let(:raw_hash) { JSON.parse(File.read('fixtures/entries/nyancat.json')) }
+
+    subject { instance.as_json }
+
+    it { is_expected.to eq(raw_hash.symbolize_keys) }
+  end
 end

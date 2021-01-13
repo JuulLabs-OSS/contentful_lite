@@ -19,6 +19,14 @@ RSpec.describe ContentfulLite::EntriesArray do
       expect(instance[5].fields['bestFriend'].fields['bestFriend']).to eq instance[5]
     end
 
+    it 'should properly serialize the nested mutually-related entries' do
+      friend = instance[5].as_json[:fields]['bestFriend']
+      expect(friend[:sys]['type']).to eq('Entry')
+      expect(friend[:sys]['id']).to eq('nyancat')
+      expect(friend[:fields]['bestFriend'][:sys][:type]).to eq('Link')
+      expect(friend[:fields]['bestFriend'][:sys][:id]).to eq('happycat')
+    end
+
     context 'with multiple locales' do
       let(:response) { JSON.parse(File.read('fixtures/entries/all_with_locales.json')) }
 
