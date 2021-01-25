@@ -53,6 +53,6 @@ RSpec.describe ContentfulLite::Link do
   end
 
   describe '#as_json' do
-    it { expect(subject.as_json).to eq(entry_hash['fields']['bestFriend'].deep_symbolize_keys) }
+    it { expect(subject.as_json).to eq(entry_hash['fields']['bestFriend']) }
   end
 end

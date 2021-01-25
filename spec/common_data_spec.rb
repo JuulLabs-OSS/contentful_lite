@@ -93,19 +93,19 @@ RSpec.describe ContentfulLite::CommonData do
 
     subject { instance.as_json }
 
-    it { is_expected.to eq(raw_hash.symbolize_keys) }
+    it { is_expected.to eq(raw_hash) }
 
     context 'when rails is passing some other parameters as hash' do
       let(:hash) { { template: "something", status: 200 } }
       subject { instance.as_json(hash) }
 
-      it { is_expected.to eq(raw_hash.symbolize_keys) }
+      it { is_expected.to eq(raw_hash) }
     end
 
     context 'when rails is passing parameters with named args syntax' do
       subject { instance.as_json(template: "something", status: 200) }
 
-      it { is_expected.to eq(raw_hash.symbolize_keys) }
+      it { is_expected.to eq(raw_hash) }
     end
   end
 end

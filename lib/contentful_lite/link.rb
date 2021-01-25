@@ -18,10 +18,10 @@ module ContentfulLite
 
     def as_json
       {
-        sys: {
-          type: "Link",
-          linkType: type.to_s.capitalize,
-          id: id
+        'sys' => {
+          'type' => "Link",
+          'linkType' => type.to_s.capitalize,
+          'id' => id
         }
       }
     end
