@@ -54,7 +54,7 @@ module ContentfulLite
       ContentfulLite::Link.new(self)
     end
 
-    def as_json(_options = nil, serialized_ids: [])
+    def as_json(serialized_ids: [], **options)
       if serialized_ids.include?(id)
         to_link.as_json
       else
@@ -62,7 +62,7 @@ module ContentfulLite
           sys: sys,
           fields: fields.transform_values do |value|
             if value.is_a?(ContentfulLite::CommonData)
-              value.as_json(serialized_ids: serialized_ids + [id])
+              value.as_json(serialized_ids: serialized_ids + [id], **options)
             else
               value
             end
