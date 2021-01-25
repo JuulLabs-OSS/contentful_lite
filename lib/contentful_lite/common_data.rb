@@ -1,3 +1,6 @@
+require "active_support/core_ext/object/json"
+require "active_support/core_ext/hash/keys"
+
 module ContentfulLite
   module CommonData
     attr_reader :id, :created_at, :updated_at, :default_locale, :revision, :space_id, :environment_id, :retrieved_at, :locales, :localized_fields, :sys
@@ -54,21 +57,19 @@ module ContentfulLite
       ContentfulLite::Link.new(self)
     end
 
-    def as_json(_options = nil, serialized_ids: [])
-      if serialized_ids.include?(id)
-        to_link.as_json
-      else
-        {
-          sys: sys,
-          fields: fields.transform_values do |value|
-            if value.is_a?(ContentfulLite::CommonData)
-              value.as_json(serialized_ids: serialized_ids + [id])
-            else
-              value
-            end
+    def as_json(serialized_ids: [], **options)
+      return to_link.as_json if serialized_ids.include?(id)
+
+      {
+        "sys" => sys,
+        "fields" => fields.transform_values do |value|
+          if value.respond_to?(:as_json)
+            value.as_json(serialized_ids: serialized_ids + [id], **options)
+          else
+            value
           end
-        }
-      end
+        end
+      }
     end
   end
 end

@@ -20,11 +20,33 @@ RSpec.describe ContentfulLite::EntriesArray do
     end
 
     it 'should properly serialize the nested mutually-related entries' do
-      friend = instance[5].as_json[:fields]['bestFriend']
-      expect(friend[:sys]['type']).to eq('Entry')
-      expect(friend[:sys]['id']).to eq('nyancat')
-      expect(friend[:fields]['bestFriend'][:sys][:type]).to eq('Link')
-      expect(friend[:fields]['bestFriend'][:sys][:id]).to eq('happycat')
+      friend = instance[5].as_json['fields']['bestFriend']
+      expect(friend['sys']['type']).to eq('Entry')
+      expect(friend['sys']['id']).to eq('nyancat')
+      expect(friend['fields']['bestFriend']['sys']['type']).to eq('Link')
+      expect(friend['fields']['bestFriend']['sys']['id']).to eq('happycat')
+    end
+
+    context 'with an array of references' do
+      let(:response) { JSON.parse(File.read('fixtures/entries/all_with_reference_array.json')) }
+
+      it 'should solve the linked assets' do
+        expect(instance[4].fields['images'].first).to be_an ContentfulLite::Asset
+        expect(instance[4].fields['images'].first.url).to eq '//images.ctfassets.net/cfexampleapi/4hlteQAXS8iS0YCMU6QMWg/2a4d826144f014109364ccf5c891d2dd/jake.png'
+      end
+
+      it 'should solve the nested mutually-related entries' do
+        expect(instance[5].fields['friends'].first).to be_an ContentfulLite::Entry
+        expect(instance[5].fields['friends'].first.fields['friends'].first).to eq instance[5]
+      end
+
+      it 'should properly serialize the nested mutually-related entries' do
+        friend = instance[5].as_json['fields']['friends'].first
+        expect(friend['sys']['type']).to eq('Entry')
+        expect(friend['sys']['id']).to eq('nyancat')
+        expect(friend['fields']['friends'].first['sys']['type']).to eq('Link')
+        expect(friend['fields']['friends'].first['sys']['id']).to eq('happycat')
+      end
     end
 
     context 'with multiple locales' do
