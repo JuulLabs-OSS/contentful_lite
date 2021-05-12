@@ -54,5 +54,13 @@ RSpec.describe ContentfulLite::Link do
 
   describe '#as_json' do
     it { expect(subject.as_json).to eq(entry_hash['fields']['bestFriend']) }
+
+    context 'when rails is passing some other parameters as hash' do
+      let(:hash) { { template: "something", status: 200 } }
+
+      it 'should not throw errors' do
+        expect(subject.as_json(hash)).to eq(entry_hash['fields']['bestFriend'])
+      end
+    end
   end
 end
