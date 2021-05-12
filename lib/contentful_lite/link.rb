@@ -16,7 +16,7 @@ module ContentfulLite
       self.class == other.class && type == other.type && id == other.id
     end
 
-    def as_json
+    def as_json(**)
       {
         'sys' => {
           'type' => "Link",
