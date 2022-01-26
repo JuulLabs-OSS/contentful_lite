@@ -1,6 +1,7 @@
 require 'active_support/concern'
 
 module ContentfulLite
+  # @api private
   module EntryMapping
     extend ActiveSupport::Concern
 

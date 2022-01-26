@@ -1,5 +1,7 @@
 module ContentfulLite
   class AssetsArray < BaseArray
+    # @param raw [Hash] raw response from Contentful API
+    # @api private
     def initialize(raw)
       super(raw)
 

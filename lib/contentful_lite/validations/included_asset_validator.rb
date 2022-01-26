@@ -1,5 +1,6 @@
 module ContentfulLite
   module Validations
+    # @api private
     class IncludedAssetValidator < ActiveModel::EachValidator
       include IncludedChildValidator
       add_options_keys :type
