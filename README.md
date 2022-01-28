@@ -1,6 +1,6 @@
-# contentful-lite
+# contentful_lite
 
-![Rspec](https://github.com/JuulLabs/contentful-lite/workflows/Rspec/badge.svg?branch=master&event=push)
+![Rspec](https://github.com/JuulLabs-OSS/contentful_lite/workflows/Rspec/badge.svg?branch=master&event=push)
 
 > Ruby SDK gem for retrieving content from Contentful Content Delivery API and Content Preview API. A lighter replacement for the official contentful gem.
 
@@ -21,7 +21,7 @@ We've been using the official contentful gem for a while and we discovered it wa
 #### Installation
 Add to your Gemfile:
 
-`gem 'contentful-lite', git: "https://github.com/JuulLabs/contentful-lite.git"`
+`gem 'contentful_lite', git: "https://github.com/JuulLabs-OSS/contentful_lite.git"`
 
 #### Use it!
 ```ruby
