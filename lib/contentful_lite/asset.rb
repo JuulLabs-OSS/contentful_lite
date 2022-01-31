@@ -4,10 +4,15 @@ module ContentfulLite
   class Asset
     include CommonData
 
+    # Gets the URL to view/edit the entry on Contentful webapp
+    # @return [String]
     def contentful_link
       "https://app.contentful.com/spaces/#{space_id}/assets/#{id}"
     end
 
+    # @api private
+    # @!macro [attach] asset_attribute
+    #   Returns the $1 attribute of the Contentful Asset
     def self.asset_attribute(key, path, default: nil)
       define_method(key) do |locale: nil|
         path.inject(fields(locale: locale)) { |hash, path_section| hash.nil? ? nil : hash[path_section] } || default

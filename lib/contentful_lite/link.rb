@@ -1,7 +1,13 @@
 module ContentfulLite
+  # A link to any type of contentful entity
   class Link
-    attr_reader :id, :type
+    # The unique id of the linked entity
+    attr_reader :id
+    # The type of the linked entity
+    attr_reader :type
 
+    # @param input [ContentfulLite::CommonData, Hash] data to build the instance
+    # @api private
     def initialize(input)
       if input.is_a?(ContentfulLite::CommonData)
         @id = input.id
@@ -12,10 +18,15 @@ module ContentfulLite
       end
     end
 
+    # Equality comparison
+    # @param other [Object] the object to compare
+    # @return [Boolean] true if other is ContentfulLite::Link with same id and type
     def ==(other)
       self.class == other.class && type == other.type && id == other.id
     end
 
+    # Provided for compatibility with Rails JSON serializer
+    # @return [Hash] a Hash representation of the link, to be formated as JSON
     def as_json(**)
       {
         'sys' => {

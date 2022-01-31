@@ -1,5 +1,6 @@
 module ContentfulLite
   module Validations
+    # @api private
     module IncludedChildValidator
       extend ActiveSupport::Concern
       BASE_OPTIONS = %i[allow_blank array].freeze

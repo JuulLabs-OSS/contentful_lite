@@ -4,8 +4,11 @@ module ContentfulLite
     include EntryMapping
     include Validations::Entry
 
+    # The id for the content type of this entry
     attr_reader :content_type_id
 
+    # @param raw [Hash] raw response from Contentful API
+    # @api private
     def initialize(raw)
       super(raw)
       @content_type_id = raw['sys']['contentType']['sys']['id']
@@ -14,10 +17,20 @@ module ContentfulLite
       end
     end
 
+    # Gets the URL to view/edit the entry on Contentful webapp
+    # @return [String]
     def contentful_link
       "https://app.contentful.com/spaces/#{space_id}/entries/#{id}"
     end
 
+    # Defines a field existing on the content type. This macro registers the
+    # accessor for that field
+    # @param attrs [Array<Symbol,String>] The field names
+    # @param default [Object, nil] The default value to return if field is not present on API response
+    # @param localizable [Boolean] If the field is marked as localizable
+    # @example Defines two string localizable localized fields
+    #   field_reader :first_name, :last_name, localizable: true
+    # @see https://github.com/JuulLabs-OSS/contentful_lite#creating-your-model-classes-with-macros
     def self.field_reader(*attrs, default: nil, localizable: false)
       attrs.each do |k|
         define_method(k) do |locale: nil|
