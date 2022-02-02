@@ -15,10 +15,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = Dir["spec/**/*"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "http", '~> 4.3'
-  spec.add_dependency "activemodel", '~> 6.0', '>= 6.0.2.1'
+  spec.add_dependency "http"
+  spec.add_dependency "activemodel"
 
-  spec.add_development_dependency "rspec", '~> 3.9'
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "vcr"
