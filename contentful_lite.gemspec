@@ -10,17 +10,18 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Simple and lite replacement client for Contentful\'s Content Delivery API'
   spec.homepage      = "https://github.com/JuulLabs-OSS/contentful_lite"
   spec.license       = 'MIT'
+  spec.required_ruby_version = '>= 2.7.0'
 
   spec.files         = Dir["lib/**/*", "LICENSE", "README.md"]
   spec.test_files    = Dir["spec/**/*"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "http"
-  spec.add_dependency "activemodel"
+  spec.add_dependency "http", '~> 5.0'
+  spec.add_dependency "activemodel", '~> 7.0', '>= 7.0.4.2'
 
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "webmock"
-  spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "vcr"
-  spec.add_development_dependency "rubocop"
+  spec.add_development_dependency "rspec", '~> 3.9'
+  spec.add_development_dependency "webmock", '~> 3.7'
+  spec.add_development_dependency "simplecov", '~> 0.17'
+  spec.add_development_dependency "vcr", '~> 5.0'
+  spec.add_development_dependency "rubocop", '~> 0.79'
 end
