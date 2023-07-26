@@ -24,6 +24,9 @@ build/
 build-iPhoneOS/
 build-iPhoneSimulator/
 
+# Ignore lock file for gemspec
+Gemfile.lock
+
 ## Specific to RubyMotion (use of CocoaPods):
 #
 # We recommend against adding the Pods directory to your .gitignore. However
