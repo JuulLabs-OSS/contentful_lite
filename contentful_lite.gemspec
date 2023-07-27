@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "http", '~> 5.0'
-  spec.add_dependency "activemodel", '~> 7.0', '>= 7.0.4.2'
+  spec.add_dependency "activemodel", '~> 6'
 
   spec.add_development_dependency "rspec", '~> 3.9'
   spec.add_development_dependency "webmock", '~> 3.18'
