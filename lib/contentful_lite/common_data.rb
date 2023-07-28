@@ -77,14 +77,16 @@ module ContentfulLite
     # @param serialized_ids [Array<String>] Ids already serialized, required for possible mutual references
     # @param options [Hash] Serialization options, only provided for compatibility
     # @return [Hash] a Hash representation of the link, to be formated as JSON
-    def as_json(serialized_ids: [], **options)
-      return to_link.as_json if serialized_ids.include?(id)
+    def as_json(args = {})
+      args[:serialized_ids] ||= []
+
+      return to_link.as_json if args[:serialized_ids].include?(id)
 
       {
         "sys" => sys,
         "fields" => fields.transform_values do |value|
           if value.respond_to?(:as_json)
-            value.as_json(serialized_ids: serialized_ids + [id], **options)
+            value.as_json(**args.merge(serialized_ids: args[:serialized_ids] + [id]))
           else
             value
           end

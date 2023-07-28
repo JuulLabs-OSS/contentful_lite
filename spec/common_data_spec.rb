@@ -97,7 +97,8 @@ RSpec.describe ContentfulLite::CommonData do
 
     context 'when rails is passing some other parameters as hash' do
       let(:hash) { { template: "something", status: 200 } }
-      subject { instance.as_json(hash) }
+
+      subject { instance.as_json(**hash) }
 
       it { is_expected.to eq(raw_hash) }
     end

@@ -18,7 +18,7 @@ module ContentfulLite
       private
 
       def record_error(record, attr_name, message)
-        record.errors.add(attr_name, :invalid, { message: message }.merge(options.except(self.class.options_keys)))
+        record.errors.add(attr_name, :invalid, **{ message: message }.merge(options.except(self.class.options_keys)))
       end
 
       def validate_array(record, attr_name, value)

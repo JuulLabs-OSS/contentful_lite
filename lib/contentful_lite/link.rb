@@ -27,7 +27,7 @@ module ContentfulLite
 
     # Provided for compatibility with Rails JSON serializer
     # @return [Hash] a Hash representation of the link, to be formated as JSON
-    def as_json(**)
+    def as_json(*)
       {
         'sys' => {
           'type' => "Link",

@@ -1,4 +1,4 @@
-name: Rspec
+name: RSpec
 
 on:
   pull_request:
@@ -11,29 +11,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.0', '3.1', '3.2']
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/cache@v2
-      id: cache
-      with:
-        path: ~/local/rubies
-        key: ruby-2.7.5
+    - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
-      id: ruby
       with:
-        ruby-version: 2.7.5
-        cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
-    - name: Print version
-      run: ruby --version
-    - name: Build
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-    - name: Run rspec and report coverage
-      uses: paambaati/codeclimate-action@v2.5.4
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: RSpec Test
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         COVERAGE: 1
-      with:
-        coverageCommand: bundle exec rspec
+      run: bundle exec rspec
