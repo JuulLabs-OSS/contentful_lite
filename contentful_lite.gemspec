@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = "contentful_lite"
   spec.version       = ContentfulLite::VERSION
   spec.authors       = ["Gonzalo Munoz", "Daniel Lopez"]
-  spec.email         = ["gonzalo.munoz@juul.com", "dlopez@juul.com"]
+  spec.email         = ["hq063gon@gmail.com", "dlopez@juul.com"]
   spec.summary       = 'Simple and lite replacement client for Contentful\'s Content Delivery API'
   spec.homepage      = "https://github.com/JuulLabs-OSS/contentful_lite"
   spec.license       = 'MIT'
