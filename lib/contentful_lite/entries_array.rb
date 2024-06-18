@@ -3,7 +3,7 @@ module ContentfulLite
     # @param raw [Hash] raw response from Contentful API
     # @api private
     def initialize(raw)
-      super(raw)
+      super
 
       # Collect arrays of missing (unresolvable) links
       @errors = raw.fetch('errors', []).collect! { |error| error.fetch('details', {}) }.each_with_object({}) do |error_detail, hash|

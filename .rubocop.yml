@@ -1,6 +1,7 @@
 # Relaxed.Ruby.Style
 ## Version 2.1
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 3.0.0
 
 Gemspec/OrderedDependencies:

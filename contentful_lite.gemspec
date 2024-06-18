@@ -13,7 +13,6 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.0.0'
 
   spec.files         = Dir["lib/**/*", "LICENSE", "README.md"]
-  spec.test_files    = Dir["spec/**/*"]
   spec.require_paths = ["lib"]
 
   spec.add_dependency "http", '~> 5.0'
