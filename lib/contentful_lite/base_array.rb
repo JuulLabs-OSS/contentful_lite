@@ -10,6 +10,7 @@ module ContentfulLite
     # @param raw [Hash] raw response from Contentful API
     # @api private
     def initialize(raw)
+      super
       @total = raw['total']
       @skip = raw['skip']
       @limit = raw['limit']

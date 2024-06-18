@@ -10,9 +10,9 @@ module ContentfulLite
     # @param raw [Hash] raw response from Contentful API
     # @api private
     def initialize(raw)
-      super(raw)
+      super
       @content_type_id = raw['sys']['contentType']['sys']['id']
-      @localized_fields.values.each do |fields|
+      @localized_fields.each_value do |fields|
         fields.transform_values! { |value| build_link(value) }
       end
     end

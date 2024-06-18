@@ -11,6 +11,7 @@ module ContentfulLite
         super(body['sys'] && body['sys']['type'] == 'Error' ? "#{body['sys']['id']}: #{body['message']}" : "Invalid Contentful Response: #{body}")
       end
     end
+
     class NotFoundError < RequestError; end
 
     attr_reader :space_id, :environment, :preview

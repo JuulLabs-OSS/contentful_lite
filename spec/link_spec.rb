@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'ostruct'
 
 RSpec.describe ContentfulLite::Link do
   let(:entry_hash) { JSON.parse(File.read('fixtures/entries/nyancat.json')) }

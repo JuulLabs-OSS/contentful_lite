@@ -3,7 +3,7 @@ module ContentfulLite
     # @param raw [Hash] raw response from Contentful API
     # @api private
     def initialize(raw)
-      super(raw)
+      super
 
       # Collect arrays of missing (unresolvable) links
       @errors = raw.fetch('errors', []).collect! { |error| error.fetch('details', {}) }.each_with_object({}) do |error_detail, hash|
@@ -52,7 +52,7 @@ module ContentfulLite
 
         klass = ContentfulLite::Entry.get_class(hash['sys']['contentType']['sys']['id'])
         @entries[id] = klass.new(hash)
-        @entries[id].localized_fields.values.each do |fields|
+        @entries[id].localized_fields.each_value do |fields|
           fields.transform_values! { |field| solve_link(field) }
         end
         @entries[id]

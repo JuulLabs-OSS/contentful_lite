@@ -6,6 +6,7 @@ RSpec.describe ContentfulLite::Validations::Entry do
       include ContentfulLite::Validations::Entry
       attr_reader :fake_field
       attr_accessor :locale
+
       send(validation_method, :fake_field, options)
 
       def initialize(value)
