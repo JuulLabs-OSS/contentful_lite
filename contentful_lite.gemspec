@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir["lib/**/*", "LICENSE", "README.md"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "http", '~> 5.0'
+  spec.add_dependency "http", '>= 5', '< 7'
   spec.add_dependency "activemodel", '>= 6.0'
 
   spec.add_development_dependency "rspec", '~> 3.9'
