@@ -94,6 +94,8 @@ module ContentfulLite
       JSON.parse(body).tap do |parsed|
         raise error_class(response.status).new(response, parsed) if response.status != 200
       end
+    rescue JSON::ParserError
+      raise error_class(response.status).new(response, body)
     end
 
     def request_headers

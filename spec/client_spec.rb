@@ -36,6 +36,20 @@ RSpec.describe ContentfulLite::Client do
       it { is_expected.to be_a(ContentfulLite::EntriesArray) }
       it { expect(subject.size).to eq 2 }
     end
+
+    context 'response JSON is invalid' do
+      before do
+        stub_request(:get, %r{contentful.com/spaces/.*/entries}).
+          to_return(body: "connection failure")
+      end
+
+      it do
+        expect { subject }.to raise_error(
+          ContentfulLite::Client::RequestError,
+          "Invalid Contentful Response: connection failure"
+        )
+      end
+    end
   end
 
   describe '#entry' do
